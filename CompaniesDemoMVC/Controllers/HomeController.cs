@@ -65,10 +65,8 @@ namespace CompaniesDemoMVC.Controllers
         [HttpPost]
         public ActionResult Delete(Company company, int id)
         {
-
                 companyrepository.DeleteCompany(id);
-                return RedirectToAction("Index");
-           
+                return RedirectToAction("Index");           
         }
     }
 }
