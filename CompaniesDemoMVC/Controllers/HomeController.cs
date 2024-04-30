@@ -27,6 +27,11 @@ namespace CompaniesDemoMVC.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (companyrepository.IsEmployeeIdExists(company.EmployeeId))
+                {
+                    ModelState.AddModelError("EmployeeId", "EmployeeId already exists. Please enter a unique EmployeeId.");
+                    return View(company);
+                }
                 companyrepository.AddCompany(company);
                 return RedirectToAction("Index");
 
@@ -57,7 +62,7 @@ namespace CompaniesDemoMVC.Controllers
         }
 
         public ActionResult Delete(int id)
-        {
+        {   
             Company company = companyrepository.GetAllEmployee().FirstOrDefault(x => x.EmployeeId == id);
             return View(company);
         }

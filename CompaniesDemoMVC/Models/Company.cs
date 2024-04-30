@@ -9,17 +9,17 @@ namespace CompaniesDemoMVC.Models
     public class Company
     {
         [Required]
-        [Display(Name ="Employee Id")]
+        [Display(Name = "Employee Id")]
         public int EmployeeId { get; set; }
-        [Required]
 
+        [Required]
         [Display(Name = "Full Name")]
         public string Name { get; set; }
-        [Required]
 
+        [Required]
         public string Designation { get; set; }
-        [Required]
 
+        [Required]  
         public int Salary { get; set; }
     }
 }

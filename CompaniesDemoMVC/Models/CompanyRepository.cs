@@ -11,7 +11,7 @@ namespace CompaniesDemoMVC.Models
 {
     public class CompanyRepository
     {
-        string connectionString = ConfigurationManager.ConnectionStrings["conn"].ConnectionString;
+        private string connectionString = ConfigurationManager.ConnectionStrings["connection"].ConnectionString;
 
         public IEnumerable<Company> GetAllEmployee()
         {
@@ -51,7 +51,18 @@ namespace CompaniesDemoMVC.Models
                 cmd.ExecuteNonQuery();
             }
         }
-
+        public bool IsEmployeeIdExists(int employeeId)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                string qurey = "select count(*) from company where EmployeeId = @EmployeeId";
+                SqlCommand cmd = new SqlCommand(qurey, connection);
+                cmd.Parameters.AddWithValue("@EmployeeId", employeeId);
+                connection.Open();
+                int count = (int)cmd.ExecuteScalar();
+                return count > 0;
+            }
+        }
         public void UpdateCompany(Company company)
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
@@ -78,5 +89,6 @@ namespace CompaniesDemoMVC.Models
                 cmd.ExecuteNonQuery();
             }
         }
+
     }
 }
